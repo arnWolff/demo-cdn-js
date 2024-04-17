@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription à notre newsletter</title>
+  <style>
+	body {
+	  color: white;
+	  font-family: Arial, sans-serif;
+	  margin: 0;
+	  padding: 0;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  background-image: url('https://i.ibb.co/ns7KVkM/background-impulse.png');
+	  background-size: cover;
+	  overflow-x: hidden; /* added to prevent horizontal scrolling */
+	}
+	
+	header {
+	  width: 90%;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-start;
+	  margin-bottom: 20px;
+	}
+
+	#logos {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  margin-bottom: 20px;
+	  padding-top: 1em;
+	}
+
+	#logos img {
+	  max-width: 250px;
+	  height: auto;
+	  margin-bottom: 10px;
+	}
+
+	main {
+	  position: relative;
+	  width: 90%;
+	  max-width: 1400px; /* changed to 100% */
+	  display: flex;
+	  flex-wrap: wrap;
+	  justify-content: center;
+	  margin: 0 auto; /* added auto margins to center the element horizontally */
+	  padding: 0 10px; /* added padding for spacing */
+	  box-sizing: border-box; /* added to include padding in total width */
+	  margin-bottom: 20px;
+	}
+
+	#intro {
+	  width: 100%;
+	  max-width: 400px;
+	  margin-bottom: 20px;
+	  margin: 0 10px;
+	}
+
+	#form-container {
+	  position: relative;
+	  width: 100%;
+	  max-width: 400px;
+	  margin-bottom: 20px;
+	  margin: 0 10px;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	select {
+	  width: calc(100% - 20px);
+	  padding: 10px;
+	  margin-bottom: 10px;
+	  border: none;
+	  border-radius: 5px;
+	  background-color: rgba(255, 255, 255, 0.1);
+	  color: white;
+	}
+
+	input[type="submit"],
+	input[type="button"] {
+	  width: 100%;
+	  padding: 10px;
+	  background-color: #f4c343;
+	  color: white;
+	  border: 2px solid transparent;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+	}
+
+	input[type="submit"]:hover,
+	input[type="button"]:hover {
+	  background-color: #fff;
+	  color: #f4c343;
+	  border-color: #f4c343;
+	}
+
+	footer {
+      width: 90%;
+      max-width: 1400px;
+      text-align: center;
+      margin-bottom: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: #4c4c4c;
+      display: flex; /* added to use flexbox for layout */
+      flex-wrap: wrap; /* added to wrap content on smaller screens */
+      justify-content: space-between; /* added to space content evenly */
+      align-items: center; /* added to vertically center content */
+    }
+
+	@media screen and (min-width: 768px) {
+	  main {
+		flex-wrap: nowrap;
+	  }
+	}
+
+	.form-step.active {
+	  left: 0;
+	  opacity: 1;
+	}
+
+	.form-wrapper {
+	  position: relative;
+	  width: 100%;
+	  max-width: 400px;
+	  margin-bottom: 20px;
+	  height: 300px;
+	}
+
+	.form-step {
+	  position: absolute;
+	  left: 100%;
+	  top: 0;
+	  width: 100%;
+	  transition: left 0.5s ease-in-out;
+	  opacity: 0;
+	  height: auto;
+	}
+
+	.form-button {
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  width: 100%;
+	  font-size: 1em;
+	}
+
+	#prevBtn {
+	  position: absolute;
+	  top: -2em;
+	  right: 0;
+	  width: auto;
+	  padding: 10px;
+	  background-color: transparent;
+	  color: #f4c343;
+	  border: none;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+	  opacity: 0;
+	  pointer-events: none;
+	}
+
+	#prevBtn:hover {
+	  background-color: rgba(255, 255, 255, 0.1);
+	}
+
+	#prevBtn.active{
+	  opacity: 1;
+	  pointer-events: auto;
+	}
+
+	.error-message {
+	  color: red;
+	  font-size: 12px;
+	  margin-top: 5px;
+	}
+
+	#step-counter {
+	  position: relative;
+	  float: right;
+	  margin-right: 1em;
+	  font-size: 0.8em;
+	  pointer-events: none;
+	  margin-bottom: 1em;
+	}
+
+	input[type="radio"] + label {
+	  margin-right: 2em;
+	}
+
+	select {
+	  width: 100%;
+	  padding: 10px;
+	  margin-bottom: 10px;
+	  border: none;
+	  border-radius: 5px;
+	  background-color: rgba(255, 255, 255, 0.1);
+	  color: white;
+	  appearance: none;
+	  -webkit-appearance: none;
+	  -moz-appearance: none;
+	}
+	select option {
+	  background-color: #333;
+	  color: white;
+	}
+
+	input[type="radio"] {
+	  margin-right: 10px;
+	  width: auto;
+	  height: auto;
+	  accent-color: #f4c343;
+	}
+	
+	input[type="checkbox"] {
+	  margin-right: 10px;
+	  width: auto;
+	  height: auto;
+	  accent-color: #f4c343;
+	}
+
+	input[type="checkbox"] + label {
+	  margin-right: 2em;
+	}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logos">
+      <img src="https://i.ibb.co/GtXBp1F/logo-multi-marques.png" id="logo-cp" alt="Logo de l'entreprise Chappée">
+    </div>
+  </header>
+  <main>
+    <div id="intro">
+      <h1>Abonnement à notre bulletin d'information dédié aux professionnels</h1>
+      <p>Inscrivez-vous pour recevoir nos dernières nouvelles et offres spéciales.</p>
+    </div>
+    <div id="form-container">
+	  <button type="button" id="prevBtn">Retour</button>
+	  <form action="/submit_form" method="post" novalidate>
+		<div class="form-wrapper">
+		  <div id="form-step-1" class="form-step active" data-step="1">
+		    <h3>Votre Abonnement</h3>
+			<p>Sélectionnez au moins une marque du groupe BDR Thermea France</p>
+			<input type="checkbox" id="de_dietrich" name="marques" value="De Dietrich" checked>
+			<label for="de_dietrich">De Dietrich</label><br>
+			<input type="checkbox" id="chappee" name="marques" value="Chappée" checked>
+			<label for="chappee">Chappée</label><br>
+		  </div>
+		  <div id="form-step-2" class="form-step" data-step="2">
+			<h3>Votre Entreprise</h3>
+			<input type="radio" id="installateur" name="fonction" value="Installateur" checked>
+			<label for="installateur">Installateur</label>
+			<input type="radio" id="distributeur" name="fonction" value="Distributeur" required>
+			<label for="distributeur">Distributeur</label><br>
+			<br>
+			<label for="siret_entreprise">Siret de votre Société:</label><br>
+			<input type="text" id="siret_entreprise" name="siret_entreprise" oninput="removeSpaces(this)" required pattern="[0-9]{14}" placeholder="14 chiffres (avec ou sans espace)"><br>
+			<label for="email">Email professionnel:</label><br>
+			<input type="email" id="email" name="email" placeholder="jean.dupond@mon-entreprise.com" required><br>			
+		  </div>
+			<div id="form-step-3" class="form-step" data-step="3">
+		    <h3>Pour mieux vous connaitre (optionnel)</h3>
+			<input type="radio" name="civilite" id="civilite1" value="M.">
+			<label for="civilite1">M.</label>
+			<input type="radio" name="civilite" id="civilite2" value="Mme">
+			<label for="civilite2">Mme</label><br>
+			<br>
+			<label for="prenom">Votre Prénom:</label><br>
+			<input type="text" id="prenom" name="prenom" placeholder="Jean"><br>
+			<label for="nom">Votre Nom:</label><br>
+			<input type="text" id="nom" name="nom" placeholder="Dupond"><br>
+			<label for="fonction">Votre Fonction au sein de l'entreprise:</label><br>
+			<select id="fonction" name="fonction">
+				<option value="" selected disabled hidden>Non renseigné</option>
+				<option value="représentant">Représentant(e) légal(e)</option>
+				<option value="commercial">Commercial(e)</option>
+				<option value="autre">Autre</option>
+			</select>			  
+			</div>
+		</div>
+		<input type="button" value="Continuez" id="nextBtn" class="form-button">
+		<input type="submit" value="S'inscrire à la Newsletter" id="submitBtn" style="display: none;" class="form-button">
+	    <span id="step-counter"></span>
+	  </form>
+	</div>
+  </main>
+  <footer>
+    <p>En soumettant ce formulaire, vous acceptez de recevoir nos communications par e-mail. Vos données seront utilisées conformément à notre <a href="https://www.dedietrich-thermique.fr/declaration-generale-de-confidentialite">politique de confidentialité</a> et ne seront pas partagées avec des tiers sans votre consentement explicite.</p>
+    <p>Vous pouvez vous désinscrire à tout moment en cliquant sur le lien de désinscription dans nos e-mails ou en <a href="https://www.dedietrich-thermique.fr/nos-services/contact-trouver-un-pro/service-consommateurs-de-dietrich">nous contactant</a>.</p>
+  </footer>
+
+  <script>
+	const nextBtn = document.getElementById("nextBtn");
+	const prevBtn = document.getElementById("prevBtn");
+	const submitBtn = document.getElementById("submitBtn");
+	const steps = document.querySelectorAll(".form-step");
+	const stepCounter = document.getElementById("step-counter");
+
+	let currentStep = 1;
+
+	updateStep();
+
+    function isStep1Valid() {
+      const currentStepElement = document.querySelector(".form-step.active");
+      const checkboxes = currentStepElement.querySelectorAll("input[type='checkbox']");
+      let isValid = false;
+
+      if (currentStep === 1) {
+        for (let i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+            isValid = true;
+            break;
+          }
+        }
+
+        if (!isValid) {
+          checkboxes[0].setCustomValidity("Veuillez sélectionner au moins une marque.");
+        } else {
+          checkboxes[0].setCustomValidity("");
+        }
+      }
+
+      return isValid;
+    }
+
+    nextBtn.addEventListener("click", function () {
+      const currentStepElement = document.querySelector(".form-step.active");
+      let isValid = true;
+
+      if (currentStep === 1) {
+        isValid = isStep1Valid();
+        if (!isValid) {
+          currentStepElement.querySelectorAll("input[type='checkbox']")[0].reportValidity();
+        }
+      } else {
+        const inputs = currentStepElement.querySelectorAll("input, select");
+        for (let i = 0; i < inputs.length; i++) {
+          if (!inputs[i].reportValidity()) {
+            isValid = false;
+            break;
+          }
+        }
+      }
+
+      if (isValid) {
+        currentStepElement.classList.remove("active");
+        currentStepElement.nextElementSibling.classList.add("active");
+        currentStep++;
+        updateStep();
+      }
+    });
+
+	
+
+	function updateStep() {
+	  stepCounter.textContent = `${currentStep}/${steps.length}`;
+	  // Show the "Go Back" button if the current step is step 2 or step 3
+	  if (currentStep > 1) {		
+		prevBtn.classList.add('active');
+	  } else {		
+		prevBtn.classList.remove('active');
+	  }
+	  
+		// Change the button text to 'Continuez' if the current step is step 2
+		if (currentStep < 3) {
+		  nextBtn.value = "Continuez";
+		  nextBtn.style.display = "block";
+		  submitBtn.style.display = "none";
+		} else {
+		  submitBtn.style.display = "block";
+		}
+	}
+	
+	function removeSpaces(input) {
+      input.value = input.value.replace(/\s/g, '');
+    }
+	
+	prevBtn.addEventListener("click", function () {
+	  const currentStepElement = document.querySelector(".form-step.active");
+	  const prevStepElement = currentStepElement.previousElementSibling;
+
+	  currentStepElement.classList.remove("active");
+	  prevStepElement.classList.add("active");
+	  currentStep--;
+	  updateStep();	  
+	});
+
+  </script>
+</body>
+</html>
