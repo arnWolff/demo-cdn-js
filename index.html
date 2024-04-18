@@ -25,6 +25,10 @@
 	  min-height: 100vh;
 	}
 	
+	h1, h3, a {
+	  color: #f4c343;
+	}
+	
 	header {
 	  width: 90%;
 	  display: flex;
@@ -54,7 +58,7 @@
 	  max-width: 1400px; /* changed to 100% */
 	  display: flex;
 	  flex-wrap: wrap;
-	  justify-content: center;
+	  justify-content: flex-start;
 	  margin: 0 auto; /* added auto margins to center the element horizontally */
 	  padding: 0 10px; /* added padding for spacing */
 	  box-sizing: border-box; /* added to include padding in total width */
@@ -63,7 +67,7 @@
 
 	#intro {
 	  width: 100%;
-	  max-width: 800px;
+	  max-width: 400px;
 	  margin-bottom: 20px;
 	  margin: 0 10px;
 	}
@@ -71,7 +75,7 @@
 	#form-container {
 	  position: relative;
 	  width: 100%;
-	  max-width: 400px;
+	  max-width: 800px;
 	  margin-bottom: 20px;
 	  margin: 0 10px;
 	  height: 350px;
@@ -136,9 +140,8 @@
 	.form-wrapper {
 	  position: relative;
 	  width: 100%;
-	  max-width: 400px;
 	  margin-bottom: 20px;
-	  height: 300px;
+	  height: 370px;
 	}
 
 	.form-step {
@@ -161,7 +164,7 @@
 
 	#prevBtn {
 	  position: absolute;
-	  top: -2em;
+	  top: 0;
 	  right: 0;
 	  width: auto;
 	  padding: 10px;
@@ -173,6 +176,7 @@
 	  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 	  opacity: 0;
 	  pointer-events: none;
+	  z-index: 1;
 	}
 
 	#prevBtn:hover {
@@ -191,12 +195,11 @@
 	}
 
 	#step-counter {
-	  position: relative;
-	  float: right;
-	  margin-right: 1em;
+	  position: absolute;
 	  font-size: 0.8em;
 	  pointer-events: none;
-	  margin-bottom: 1em;
+	  bottom: 1em;
+	  right: 1em;
 	}
 
 	input[type="radio"] + label {
@@ -258,57 +261,57 @@
   <main>
     <div id="intro">
       <h1>Abonnement à notre bulletin d'information dédié aux professionnels</h1>
-      <p>Inscrivez-vous pour recevoir nos dernières nouvelles et offres spéciales.</p>
-	  <p>En soumettant ce formulaire, vous acceptez de recevoir nos communications par e-mail. Vos données seront utilisées conformément à notre <a href="https://www.dedietrich-thermique.fr/declaration-generale-de-confidentialite">politique de confidentialité</a> et ne seront pas partagées avec des tiers sans votre consentement explicite.</p>
     </div>
     <div id="form-container">
-	  <button type="button" id="prevBtn">Retour</button>
-	  <form action="/submit_form" method="post" novalidate>
+	  <button type="button" id="prevBtn">Retour</button>	  
 		<div class="form-wrapper">
-		  <div id="form-step-1" class="form-step active" data-step="1">
-		    <h3>Votre Abonnement</h3>
-			<p>Sélectionnez au moins une marque du groupe BDR Thermea France</p>
-			<input type="checkbox" id="de_dietrich" name="marques" value="De Dietrich" checked>
-			<label for="de_dietrich">De Dietrich</label><br>
-			<input type="checkbox" id="chappee" name="marques" value="Chappée" checked>
-			<label for="chappee">Chappée</label><br>
-		  </div>
-		  <div id="form-step-2" class="form-step" data-step="2">
-			<h3>Votre Entreprise</h3>
-			<input type="radio" id="installateur" name="fonction" value="Installateur" checked>
-			<label for="installateur">Installateur</label>
-			<input type="radio" id="distributeur" name="fonction" value="Distributeur" required>
-			<label for="distributeur">Distributeur</label><br>
-			<br>
-			<label for="siret_entreprise">Siret de votre Société:</label><br>
-			<input type="text" id="siret_entreprise" name="siret_entreprise" oninput="removeSpaces(this)" required pattern="[0-9]{14}" placeholder="14 chiffres (avec ou sans espace)"><br>
-			<label for="email">Email professionnel:</label><br>
-			<input type="email" id="email" name="email" placeholder="jean.dupond@mon-entreprise.com" required><br>			
-		  </div>
-			<div id="form-step-3" class="form-step" data-step="3">
-		    <h3>Pour mieux vous connaitre (optionnel)</h3>
-			<input type="radio" name="civilite" id="civilite1" value="M.">
-			<label for="civilite1">M.</label>
-			<input type="radio" name="civilite" id="civilite2" value="Mme">
-			<label for="civilite2">Mme</label><br>
-			<br>
-			<label for="prenom">Votre Prénom:</label><br>
-			<input type="text" id="prenom" name="prenom" placeholder="Jean"><br>
-			<label for="nom">Votre Nom:</label><br>
-			<input type="text" id="nom" name="nom" placeholder="Dupond"><br>
-			<label for="fonction">Votre Fonction au sein de l'entreprise:</label><br>
-			<select id="fonction" name="fonction">
-				<option value="" selected disabled hidden>Non renseigné</option>
-				<option value="représentant">Représentant(e) légal(e)</option>
-				<option value="commercial">Commercial(e)</option>
-				<option value="autre">Autre</option>
-			</select>			  
-			</div>
+		<form action="/submit_form" method="post" novalidate>
+			  <div id="form-step-1" class="form-step active" data-step="1">
+				<h3>Votre Abonnement</h3>			
+				<p>Inscrivez-vous pour recevoir nos dernières nouvelles et offres spéciales.</p>
+				<p>En soumettant ce formulaire, vous acceptez de recevoir nos communications par e-mail. Vos données seront utilisées conformément à notre <a href="https://www.dedietrich-thermique.fr/declaration-generale-de-confidentialite">politique de confidentialité</a> et ne seront pas partagées avec des tiers sans votre consentement explicite.</p>
+				<p>Sélectionnez au moins une marque du groupe BDR Thermea France</p>
+				<input type="checkbox" id="de_dietrich" name="marques" value="De Dietrich" checked>
+				<label for="de_dietrich">De Dietrich</label><br>
+				<input type="checkbox" id="chappee" name="marques" value="Chappée" checked>
+				<label for="chappee">Chappée</label><br>
+			  </div>
+			  <div id="form-step-2" class="form-step" data-step="2">
+				<h3>Votre Entreprise</h3>
+				<input type="radio" id="installateur" name="fonction" value="Installateur" checked>
+				<label for="installateur">Installateur</label>
+				<input type="radio" id="distributeur" name="fonction" value="Distributeur" required>
+				<label for="distributeur">Distributeur</label><br>
+				<br>
+				<label for="siret_entreprise">Siret de votre Société:</label><br>
+				<input type="text" id="siret_entreprise" name="siret_entreprise" oninput="removeSpaces(this)" required pattern="[0-9]{14}" placeholder="14 chiffres (avec ou sans espace)"><br>
+				<label for="email">Email professionnel:</label><br>
+				<input type="email" id="email" name="email" placeholder="jean.dupond@mon-entreprise.com" required><br>			
+			  </div>
+				<div id="form-step-3" class="form-step" data-step="3">
+				<h3>Pour mieux vous connaitre (optionnel)</h3>
+				<input type="radio" name="civilite" id="civilite1" value="M.">
+				<label for="civilite1">M.</label>
+				<input type="radio" name="civilite" id="civilite2" value="Mme">
+				<label for="civilite2">Mme</label><br>
+				<br>
+				<label for="prenom">Votre Prénom:</label><br>
+				<input type="text" id="prenom" name="prenom" placeholder="Jean"><br>
+				<label for="nom">Votre Nom:</label><br>
+				<input type="text" id="nom" name="nom" placeholder="Dupond"><br>
+				<label for="fonction">Votre Fonction au sein de l'entreprise:</label><br>
+				<select id="fonction" name="fonction">
+					<option value="" selected disabled hidden>Non renseigné</option>
+					<option value="représentant">Représentant(e) légal(e)</option>
+					<option value="commercial">Commercial(e)</option>
+					<option value="autre">Autre</option>
+				</select>			  
+				</div>
+				<input type="button" value="Continuez" id="nextBtn" class="form-button">
+				<input type="submit" value="S'inscrire à la Newsletter" id="submitBtn" style="display: none;" class="form-button">
+				<span id="step-counter"></span>
+			</form>
 		</div>
-		<input type="button" value="Continuez" id="nextBtn" class="form-button">
-		<input type="submit" value="S'inscrire à la Newsletter" id="submitBtn" style="display: none;" class="form-button">
-	    <span id="step-counter"></span>
-	  </form>
 	</div>
   </main>
   <footer>
