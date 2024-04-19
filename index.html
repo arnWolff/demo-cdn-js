@@ -657,9 +657,9 @@
         // Get the email from the form data
         const email = formData.get("email");
         // Hide the intro and form wrapper
-        const intro = document.getElementById("intro");
+        const introWrapper = document.getElementById("intro-wrapper");
         const formContainer = document.querySelector("#form-container");
-        intro.style.display = "none";
+        introWrapper.style.display = "none";
         formContainer.style.display = "none";
         // Show the success message with the email
         const successMessage = document.getElementById("success-message");
