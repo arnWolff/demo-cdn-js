@@ -299,6 +299,8 @@
         align-items: center;
         height: 350px;
         width: 100%;
+        flex-direction: column;
+        opacity: 0;
       }
 
       #success-email {
@@ -338,6 +340,34 @@
         text-align: right;
         width: 100%;
         font-size: .6em;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out both;
+      }
+
+      .fade-out {
+        animation: fadeOut 0.5s ease-in-out both;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+
+        to {
+          opacity: 0;
+        }
       }
     </style>
   </head>
@@ -659,14 +689,20 @@
         // Hide the intro and form wrapper
         const introWrapper = document.getElementById("intro-wrapper");
         const formContainer = document.querySelector("#form-container");
-        introWrapper.style.display = "none";
-        formContainer.style.display = "none";
-        // Show the success message with the email
+        // Add fade-out class to intro-wrapper and form-container
+        introWrapper.classList.add("fade-out");
+        formContainer.classList.add("fade-out");
         const successMessage = document.getElementById("success-message");
         const successEmail = document.getElementById("success-email");
         successEmail.textContent = `${email}`;
-        successMessage.style.display = "flex";
-        successMessage.style.flexDirection = "column";
+        // Wait for the animations to finish before changing the display property and showing the success message
+        setTimeout(() => {
+          introWrapper.style.display = "none";
+          formContainer.style.display = "none";
+          successMessage.style.display = "flex";
+          // Add fade-in class to success-message
+          successMessage.classList.add("fade-in");
+        }, 800); // The timeout should match the duration of the fadeOut animation
       });
     </script>
   </body>
