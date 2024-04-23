@@ -5,348 +5,338 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Inscription à notre newsletter</title>
       <style>
-         html {
-         overflow-x: hidden;
-         }
-         body {
-         color: white;
-         font-family: Arial, sans-serif;
-         margin: 0;
-         padding: 0;
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         background-image: url('https://i.ibb.co/ns7KVkM/background-impulse.png');
-         background-size: cover;
-         background-position: center;
-         background-repeat: no-repeat;
-         overflow-x: hidden;
-         min-height: 100vh;
-         }
-         body.loading header,
-         body.loading main,
-         body.loading footer {
-         visibility: hidden;
-         }
-         #loader {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background-image: url('data:image/svg+xml;utf8,<svg%20xmlns="http://www.w3.org/2000/svg"%20xmlns:xlink="http://www.w3.org/1999/xlink"%20viewBox="0%200%20100%20100"%20enable-background="new%200%200%200%200"%20xml:space="preserve"><path%20fill="%23f4c343"%20d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50%20M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"><animateTransform%20attributeName="transform"%20attributeType="XML"%20type="rotate"%20dur="1s"%20from="0%2050%2050"%20to="360%2050%2050"%20repeatCount="indefinite"/></path></svg>');
-         background-repeat: no-repeat;
-         background-position: center;
-         background-size: 5em 5em;
-         z-index: 9999;
-         animation: loader-fade 0.5s ease-out both;
-         }
-         body.loading #loader {
-         animation: none;
-         }
-         @keyframes loader-fade {
-         from {
-         opacity: 1;
-         }
-         to {
-         opacity: 0;
-         }
-         }
-         h1,
-         h3 {
-         color: #f4c343;
-         }
-         a {
-         color: #FFF599;
-         }
-         header {
-         width: 90%;
-         display: flex;
-         flex-direction: column;
-         align-items: flex-start;
-         margin-bottom: 20px;
-         }
-         #logos {
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         margin-bottom: 20px;
-         padding-top: 1em;
-         }
-         #logos img {
-         max-width: 250px;
-         height: auto;
-         margin-bottom: 10px;
-         }
-         main {
-         flex-grow: 1;
-         position: relative;
-         width: 90%;
-         max-width: 1400px;
-         /* changed to 100% */
-         display: flex;
-         flex-wrap: wrap;
-         justify-content: flex-start;
-         margin: 0 auto;
-         /* added auto margins to center the element horizontally */
-         padding: 0 10px;
-         /* added padding for spacing */
-         box-sizing: border-box;
-         /* added to include padding in total width */
-         margin-bottom: 20px;
-         }
-         #intro {
-         width: 100%;
-         max-width: 400px;
-         margin-bottom: 20px;
-         margin: 0 10px;
-         }
-         #form-container {
-         position: relative;
-         width: 100%;
-         max-width: 800px;
-         margin-bottom: 20px;
-         margin: 0 10px;
-         height: 350px;
-         }
-         input[type="text"],
-         input[type="email"],
-         select {
-         width: calc(100% - 20px);
-         padding: 10px;
-         margin-bottom: 10px;
-         border: none;
-         border-radius: 5px;
-         background-color: rgba(255, 255, 255, 0.1);
-         color: white;
-         }
-         input[type="submit"],
-         input[type="button"] {
-         width: 100%;
-         padding: 10px;
-         background-color: #f4c343;
-         color: white;
-         border: 2px solid transparent;
-         border-radius: 5px;
-         cursor: pointer;
-         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-         }
-         input[type="submit"]:hover,
-         input[type="button"]:hover {
-         background-color: #fff;
-         color: #f4c343;
-         border-color: #f4c343;
-         }
-         footer {
-         width: 90%;
-         max-width: 1400px;
-         text-align: center;
-         margin-bottom: 20px;
-         padding-top: 10px;
-         padding-bottom: 10px;
-         display: flex;
-         flex-wrap: wrap;
-         justify-content: flex-start;
-         position: static;
-         }
-         .social-pane {
-         display: none;
-         flex-direction: column;
-         align-items: flex-start;
-         }
-         .h4-like {
-         margin-top: -1.5em;
-         }
-         .social-icons {
-         display: flex;
-         flex-wrap: nowrap;
-         list-style-type: none;
-         padding: 0;
-         margin: 0;
-         }
-         .social-icons li {
-         margin-right: 1em;
-         display: inline-block;
-         }
-         .social-icons svg {
-         width: 2.5em;
-         }
-         @media screen and (min-width: 896px) {
-         main {
-         flex-wrap: nowrap;
-         }
-         #social-grid-large {
-         display: flex;
-         }
-         }
-         @media screen and (max-width: 895px) {
-         #social-grid-small {
-         display: flex;
-         margin-top: 2.5em;
-         }
-         }
-         .form-step.active {
-         left: 0;
-         opacity: 1;
-         }
-         .form-wrapper {
-         position: relative;
-         width: 100%;
-         margin-bottom: 20px;
-         height: 400px;
-         }
-         .form-step {
-         position: absolute;
-         left: 100%;
-         top: 0;
-         width: 100%;
-         transition: left 0.5s ease-in-out;
-         opacity: 0;
-         height: auto;
-         }
-         .form-button {
-         position: absolute;
-         bottom: 0;
-         left: 0;
-         width: 100%;
-         font-size: 1em;
-         }
-         #prevBtn {
-         position: absolute;
-         top: 0;
-         right: 0;
-         width: auto;
-         padding: 10px;
-         background-color: transparent;
-         color: #f4c343;
-         border: none;
-         border-radius: 5px;
-         cursor: pointer;
-         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-         opacity: 0;
-         pointer-events: none;
-         z-index: 1;
-         }
-         #prevBtn:hover {
-         background-color: rgba(255, 255, 255, 0.1);
-         }
-         #prevBtn.active {
-         opacity: 1;
-         pointer-events: auto;
-         }
-         .error-message {
-         color: red;
-         font-size: 12px;
-         margin-top: 5px;
-         }
-         #step-counter {
-         position: absolute;
-         font-size: 0.8em;
-         pointer-events: none;
-         bottom: 1em;
-         right: 1em;
-         }
-         input[type="radio"]+label {
-         margin-right: 2em;
-         }
-         select {
-         width: 100%;
-         padding: 10px;
-         margin-bottom: 10px;
-         border: none;
-         border-radius: 5px;
-         background-color: rgba(255, 255, 255, 0.1);
-         color: white;
-         appearance: none;
-         -webkit-appearance: none;
-         -moz-appearance: none;
-         }
-         select option {
-         background-color: #333;
-         color: white;
-         }
-         input[type="radio"] {
-         margin-right: 10px;
-         width: auto;
-         height: auto;
-         accent-color: #FFF599;
-         }
-         input[type="checkbox"] {
-         margin-right: 10px;
-         width: auto;
-         height: auto;
-         accent-color: #FFF599;
-         }
-         input[type="checkbox"]+label {
-         margin-right: 2em;
-         }
-         #logo-cp {
-         width: 92%;
-         margin-top: -2.7em;
-         }
-         #success-message {
-         display: none;
-         justify-content: center;
-         align-items: center;
-         height: 350px;
-         width: 100%;
-         flex-direction: column;
-         opacity: 0;
-         }
-         #success-email {
-         text-align: center;
-         color: #f4c343;
-         Font-size: 1.4em;
-         }
-         #arrows-wrapper {
-         width: 100%;
-         display: flex;
-         justify-content: flex-end;
-         align-items: center;
-         }
-         #blue_copy {
-         margin-right: 0;
-         /* Optional: Remove margin if needed */
-         }
-         #intro-wrapper {
-         position: relative;
-         }
-         #arrows-wrapper {
-         position: absolute;
-         top: 1em;
-         right: 1em;
-         width: 25%;
-         }
-         #intro-text {
-         width: 75%;
-         }
-         #copyright {
-         text-align: right;
-         width: 100%;
-         font-size: .6em;
-         }
-         .fade-in {
-         animation: fadeIn 0.5s ease-in-out both;
-         }
-         .fade-out {
-         animation: fadeOut 0.5s ease-in-out both;
-         }
-         @keyframes fadeIn {
-         from {
-         opacity: 0;
-         }
-         to {
-         opacity: 1;
-         }
-         }
-         @keyframes fadeOut {
-         from {
-         opacity: 1;
-         }
-         to {
-         opacity: 0;
-         }
-         }
+			html {
+				 overflow-x: hidden;
+			}
+			 body {
+				 color: white;
+				 font-family: Arial, sans-serif;
+				 margin: 0;
+				 padding: 0;
+				 display: flex;
+				 flex-direction: column;
+				 align-items: center;
+				 background-image: url('https://i.ibb.co/ns7KVkM/background-impulse.png');
+				 background-size: cover;
+				 background-position: center;
+				 background-repeat: no-repeat;
+				 overflow-x: hidden;
+				 min-height: 100vh;
+			}
+			 body.loading header, body.loading main, body.loading footer {
+				 opacity: 0;
+				 animation: none;
+			}
+			 body header, body main, body footer {
+				 animation: fadeIn 1.5s ease-out both;
+			}
+			 #loader {
+				 position: fixed;
+				 top: 0;
+				 left: 0;
+				 width: 100%;
+				 height: 100%;
+				 background-image: url('data:image/svg+xml; utf8, <svg%20 xmlns="http://www.w3.org/2000/svg" %20 xmlns:xlink="http://www.w3.org/1999/xlink" %20viewBox="0%200%20100%20100" %20enable-background="new%200%200%200%200" %20xml:space="preserve"> <path%20fill="%23f4c343"%20d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50%20M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"> <animateTransform%20attributeName="transform"%20attributeType="XML"%20type="rotate"%20dur="1s"%20from="0%2050%2050"%20to="360%2050%2050"%20repeatCount="indefinite" /> </path> </svg>');
+				 background-repeat: no-repeat;
+				 background-position: center;
+				 background-size: 5em 5em;
+				 z-index: 9999;
+				 animation: fadeOut 0.5s ease-out both;
+			}
+			 body.loading #loader {
+				 animation: none;
+			}
+			 
+			 h1, h3 {
+				 color: #f4c343;
+			}
+			 a {
+				 color: #FFF599;
+			}
+			 header {
+				 width: 90%;
+				 display: flex;
+				 flex-direction: column;
+				 align-items: flex-start;
+				 margin-bottom: 20px;
+			}
+			 #logos {
+				 display: flex;
+				 flex-direction: column;
+				 align-items: center;
+				 margin-bottom: 20px;
+				 padding-top: 1em;
+			}
+			 #logos img {
+				 max-width: 250px;
+				 height: auto;
+				 margin-bottom: 10px;
+			}
+			 main {
+				 flex-grow: 1;
+				 position: relative;
+				 width: 90%;
+				 max-width: 1400px;
+				/* changed to 100% */
+				 display: flex;
+				 flex-wrap: wrap;
+				 justify-content: flex-start;
+				 margin: 0 auto;
+				/* added auto margins to center the element horizontally */
+				 padding: 0 10px;
+				/* added padding for spacing */
+				 box-sizing: border-box;
+				/* added to include padding in total width */
+				 margin-bottom: 20px;
+			}
+			 #intro {
+				 width: 100%;
+				 max-width: 400px;
+				 margin-bottom: 20px;
+				 margin: 0 10px;
+			}
+			 #form-container {
+				 position: relative;
+				 width: 100%;
+				 max-width: 800px;
+				 margin-bottom: 20px;
+				 margin: 0 10px;
+				 height: 350px;
+			}
+			 input[type="text"], input[type="email"], select {
+				 width: calc(100% - 20px);
+				 padding: 10px;
+				 margin-bottom: 10px;
+				 border: none;
+				 border-radius: 5px;
+				 background-color: rgba(255, 255, 255, 0.1);
+				 color: white;
+			}
+			 input[type="submit"], input[type="button"] {
+				 width: 100%;
+				 padding: 10px;
+				 background-color: #f4c343;
+				 color: white;
+				 border: 2px solid transparent;
+				 border-radius: 5px;
+				 cursor: pointer;
+				 transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+			}
+			 input[type="submit"]:hover, input[type="button"]:hover {
+				 background-color: #fff;
+				 color: #f4c343;
+				 border-color: #f4c343;
+			}
+			 footer {
+				 width: 90%;
+				 max-width: 1400px;
+				 text-align: center;
+				 margin-bottom: 20px;
+				 padding-top: 10px;
+				 padding-bottom: 10px;
+				 display: flex;
+				 flex-wrap: wrap;
+				 justify-content: flex-start;
+				 position: static;
+			}
+			 .social-pane {
+				 display: none;
+				 flex-direction: column;
+				 align-items: flex-start;
+			}
+			 .h4-like {
+				 margin-top: -1.5em;
+			}
+			 .social-icons {
+				 display: flex;
+				 flex-wrap: nowrap;
+				 list-style-type: none;
+				 padding: 0;
+				 margin: 0;
+			}
+			 .social-icons li {
+				 margin-right: 1em;
+				 display: inline-block;
+			}
+			 .social-icons svg {
+				 width: 2.5em;
+			}
+			 @media screen and (min-width: 896px) {
+				 main {
+					 flex-wrap: nowrap;
+				}
+				 #social-grid-large {
+					 display: flex;
+				}
+			}
+			 @media screen and (max-width: 895px) {
+				 #social-grid-small {
+					 display: flex;
+					 margin-top: 2.5em;
+				}
+			}
+			 .form-step.active {
+				 left: 0;
+				 opacity: 1;
+			}
+			 .form-wrapper {
+				 position: relative;
+				 width: 100%;
+				 margin-bottom: 20px;
+				 height: 400px;
+			}
+			 .form-step {
+				 position: absolute;
+				 left: 100%;
+				 top: 0;
+				 width: 100%;
+				 transition: left 0.5s ease-in-out;
+				 opacity: 0;
+				 height: auto;
+			}
+			 .form-button {
+				 position: absolute;
+				 bottom: 0;
+				 left: 0;
+				 width: 100%;
+				 font-size: 1em;
+			}
+			 #prevBtn {
+				 position: absolute;
+				 top: 0;
+				 right: 0;
+				 width: auto;
+				 padding: 10px;
+				 background-color: transparent;
+				 color: #f4c343;
+				 border: none;
+				 border-radius: 5px;
+				 cursor: pointer;
+				 transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+				 opacity: 0;
+				 pointer-events: none;
+				 z-index: 1;
+			}
+			 #prevBtn:hover {
+				 background-color: rgba(255, 255, 255, 0.1);
+			}
+			 #prevBtn.active {
+				 opacity: 1;
+				 pointer-events: auto;
+			}
+			 .error-message {
+				 color: red;
+				 font-size: 12px;
+				 margin-top: 5px;
+			}
+			 #step-counter {
+				 position: absolute;
+				 font-size: 0.8em;
+				 pointer-events: none;
+				 bottom: 1em;
+				 right: 1em;
+			}
+			 input[type="radio"]+label {
+				 margin-right: 2em;
+			}
+			 select {
+				 width: 100%;
+				 padding: 10px;
+				 margin-bottom: 10px;
+				 border: none;
+				 border-radius: 5px;
+				 background-color: rgba(255, 255, 255, 0.1);
+				 color: white;
+				 appearance: none;
+				 -webkit-appearance: none;
+				 -moz-appearance: none;
+			}
+			 select option {
+				 background-color: #333;
+				 color: white;
+			}
+			 input[type="radio"] {
+				 margin-right: 10px;
+				 width: auto;
+				 height: auto;
+				 accent-color: #FFF599;
+			}
+			 input[type="checkbox"] {
+				 margin-right: 10px;
+				 width: auto;
+				 height: auto;
+				 accent-color: #FFF599;
+			}
+			 input[type="checkbox"]+label {
+				 margin-right: 2em;
+			}
+			 #logo-cp {
+				 width: 92%;
+				 margin-top: -2.7em;
+			}
+			 #success-message {
+				 display: none;
+				 justify-content: center;
+				 align-items: center;
+				 height: 350px;
+				 width: 100%;
+				 flex-direction: column;
+				 opacity: 0;
+			}
+			 #success-email {
+				 text-align: center;
+				 color: #f4c343;
+				 Font-size: 1.4em;
+			}
+			 #arrows-wrapper {
+				 width: 100%;
+				 display: flex;
+				 justify-content: flex-end;
+				 align-items: center;
+			}
+			 #blue_copy {
+				 margin-right: 0;
+				/* Optional: Remove margin if needed */
+			}
+			 #intro-wrapper {
+				 position: relative;
+			}
+			 #arrows-wrapper {
+				 position: absolute;
+				 top: 1em;
+				 right: 1em;
+				 width: 25%;
+			}
+			 #intro-text {
+				 width: 75%;
+			}
+			 #copyright {
+				 text-align: right;
+				 width: 100%;
+				 font-size: .6em;
+			}
+			 .fade-in {
+				 animation: fadeIn 0.5s ease-in-out both;
+			}
+			 .fade-out {
+				 animation: fadeOut 0.5s ease-in-out both;
+			}
+			 @keyframes fadeIn {
+				 from {
+					 opacity: 0;
+				}
+				 to {
+					 opacity: 1;
+				}
+			}
+			 @keyframes fadeOut {
+				 from {
+					 opacity: 1;
+				}
+				 to {
+					 opacity: 0;
+				}
+			}
       </style>
    </head>
    <body class="loading">
@@ -684,8 +674,7 @@
            }, 800); // The timeout should match the duration of the fadeOut animation
          });
          window.addEventListener('load', function() {
-           document.body.classList.remove('loading');
-         
+           document.body.classList.remove('loading');         
            const loader = document.getElementById('loader');
            loader.addEventListener('animationend', function() {
              loader.style.display = 'none';
