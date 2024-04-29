@@ -354,7 +354,7 @@
          <div id="intro-wrapper">
             <div id="intro-text">
                <h1>Abonnement à notre bulletin d'information dédié aux professionnels</h1>
-               <p>Inscrivez-vous pour recevoir nos dernières nouvelles et offres spéciales.</p>
+               <p>Vous bénéficiez d’offres personnalisées, d’avantages exclusifs, de promotions sur-mesure et d’informations utiles tout au long de l’année, telles que le catalogue tarif, les nouveautés produits, les documentations commerciales... Vous les recevez par courrier électronique en vous inscrivant à notre newsletter.</p>
             </div>
             <div id="social-grid-large" class="social-pane">
                <div id="arrows-wrapper">
@@ -673,7 +673,33 @@
              successMessage.classList.add("fade-in");
            }, 800); // The timeout should match the duration of the fadeOut animation
          });
+		 
+		 function handleResize() {
+		  // Get all elements with the class 'form-step'
+		  const formSteps = document.querySelectorAll('.form-step');
+
+		  // Initialize maxHeight to 0
+		  let maxHeight = 0;
+
+		  // Iterate over each formStep to find the tallest one
+		  formSteps.forEach(function(formStep) {
+			// If the current formStep's height is greater than maxHeight, update maxHeight
+			if (formStep.offsetHeight > maxHeight) {
+			  maxHeight = formStep.offsetHeight;
+			}
+		  });
+		  
+		  let newHeight = maxHeight + 50;
+		  // Set the height of '#form-container' and '.form-wrapper' to the maxHeight
+		  document.getElementById('form-container').style.height = newHeight + 'px';
+		  document.querySelector('.form-wrapper').style.height = newHeight + 'px';
+		}
+		
+		 // Add the resize event listener
+         window.addEventListener('resize', handleResize);
+
          window.addEventListener('load', function() {
+		   handleResize();
            document.body.classList.remove('loading');         
            const loader = document.getElementById('loader');
            loader.addEventListener('animationend', function() {
